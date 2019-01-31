@@ -11,10 +11,10 @@ def signin():
 
 @app.route("/", methods=["POST"])
 def user_signin():
-    username = request.form["username"]
-    email = request.form["email"]
-    password =  request.form["password"]
-    password_v =  request.form["password_v"]
+    username = cgi.escape(request.form["username"])
+    email = cgi.escape(request.form["email"])
+    password =  cgi.escape(request.form["password"])
+    password_v =  cgi.escape(request.form["password_v"])
     username_error = ""
     password_error = ""
     email_error = ""
