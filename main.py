@@ -37,18 +37,16 @@ def user_signin():
     elif len(password) < 3 or len(password) > 20:
         password_error = "Please input a password between 3 and 20 characters"
 
-    if not email and  not username_error and not password_error and not email_error:
+    if " " in email or "@" not in email or "." not in email:
+        if email != "":    
+            email_error = "Please enter a valid email."
+
+    if not username_error and not password_error and not email_error:
         username = request.form["username"]
         return redirect("/signin?username={0}".format(username))
     
-    elif "@" in email and "." in email and not " " in email:
-        username = request.form["username"]
-        return redirect("/signin?username={0}".format(username))
-
     else:
-        email_error = "Please enter a valid email."
-
-    return render_template("edit.html", 
+        return render_template("edit.html", 
         username_error = username_error,
         password_error = password_error,
         email_error = email_error,
